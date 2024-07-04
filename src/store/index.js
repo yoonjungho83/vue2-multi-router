@@ -1,17 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+import invCommon from '@/store/modules/invCommon.js'; 
+import menuHircy from '@/store/modules/menuHircy.js'; 
+
+const store = new Vuex.Store({
+	modules: {
+		invCommon,
+		menuHircy,
+	},
+});
+
+export default store;
