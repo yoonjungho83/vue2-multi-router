@@ -1,7 +1,7 @@
 
 
 <script>
-import { ref, reactive } from '@vue/composition-api'
+import { ref, reactive, watch , computed } from '@vue/composition-api'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -44,10 +44,17 @@ export default {
               "component": "PopupDetailComponent",
             }
         );
+        state.selectedIdx++;
       };
 
+      watch(menuList , ()=>{
+        console.log("watch");
+      })
+
+      const selectedIdx = computed(() => state.selectedIdx*2);
+
       return{
-        state , menuList , fn_setMenu
+        state , menuList , fn_setMenu , selectedIdx
       }
   }
 
@@ -74,6 +81,7 @@ export default {
     <button @click="fn_setMenu" > setmenu</button>
     <h1>getViewMode : {{this.viewMode}}</h1>
     <h1>container : {{state.container}}</h1>
+    <h1>selectedIdx*2 : {{selectedIdx}}</h1>
   </div>
 </template>
 
