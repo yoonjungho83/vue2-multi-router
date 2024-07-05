@@ -9,6 +9,7 @@
   <script>
   import { GridView, LocalDataProvider } from 'realgrid';
   import { columns, fields, rows } from './realgrid-data';
+  import { ref, reactive } from "vue";
   
 
   const tempArray = 
@@ -51,7 +52,7 @@
 
   export default {
     name: 'RealGrid',
-    props: ["domName"],
+    props: ["domName","dataset" ],
     data: function () {
         return {
             gridName: this.domName,
