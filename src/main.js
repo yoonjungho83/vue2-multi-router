@@ -10,3 +10,4 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+require('../node_modules/realgrid/dist/realgrid-style.css');

@@ -31,6 +31,12 @@ export default {
        }
     },
 
+    computed : {
+      getHircyList(){
+        
+      }
+    },
+
     beforeCreate() {
      
     },
