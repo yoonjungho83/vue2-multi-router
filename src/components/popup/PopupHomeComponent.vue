@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h2>Popup Home</h2>
+      <h2>Realgrid tree sample</h2>
       <button @click="$router.push({ name: 'PopupDetail' })">Go to Detail</button>
 
       <CustomRealTreeVue :domName="treeNm" />

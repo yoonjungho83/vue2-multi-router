@@ -24,7 +24,8 @@
         loadData: function() {
           
           console.log("tree rows",rows);
-          this.treeProvider.setRows(rows, "treeId", false, null, "iconField");
+        //   this.treeProvider.addRows(rows, "treeId", false, null, "iconField");
+        //   this.treeProvider.setRows(rows, "treeId", false, null, "iconField");
         }
     },
     mounted() {
@@ -37,7 +38,7 @@
   
       this.treeProvider.setFields(fields);
       this.treeView.setColumns(columns);
-    //   this.treeProvider.setRows(rows, "treeId", false, null, "iconField");
+      this.treeProvider.setRows(rows, "treeId", false, null, "iconField");
     }
   }
   </script>
