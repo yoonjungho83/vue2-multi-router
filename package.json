@@ -10,6 +10,7 @@
   "dependencies": {
     "@vue/composition-api": "^1.7.2",
     "core-js": "^3.8.3",
+    "gojs": "^3.0.7",
     "html2pdf.js": "^0.9.0",
     "realgrid": "^2.8.3",
     "vue": "^2.6.14",

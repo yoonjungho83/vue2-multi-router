@@ -57,16 +57,9 @@ export default {
         state , menuList , fn_setMenu , selectedIdx
       }
   }
-
-  
-  
-
-  
 }
 
 </script>
-
-
 
 
 <template>

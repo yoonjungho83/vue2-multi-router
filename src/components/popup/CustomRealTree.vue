@@ -29,16 +29,23 @@
         }
     },
     mounted() {
-      console.log(this.gridName);
+        
+        console.log(this.gridName);
       
-      this.treeProvider = new LocalTreeDataProvider(false);
-      this.treeView = new TreeView(this.gridName);
-      
-      this.treeView.setDataSource(this.treeProvider);
-  
-      this.treeProvider.setFields(fields);
-      this.treeView.setColumns(columns);
-      this.treeProvider.setRows(rows, "treeId", false, null, "iconField");
+        this.treeProvider = new LocalTreeDataProvider(false);
+        this.treeView = new TreeView(this.gridName);
+        
+        this.treeView.setDataSource(this.treeProvider);
+    
+        this.treeView.setRowIndicator({visible: false});//그리드 번호
+        this.treeView.setCheckBar({visible: false});//기본 체크박스
+        
+        this.treeProvider.setFields(fields);
+        this.treeView.setColumns(columns);
+        this.treeProvider.setRows(rows, "treeId", false, null, "iconField");
+        this.treeView.columnByName("treeId").visible =  false;//컬럼 숨김
+        
+        this.treeView.expandAll();//펼침
     }
   }
   </script>

@@ -1,12 +1,12 @@
 import { ValueType } from "realgrid";
 
 export const fields = [
-    {fieldName:"area1code", dataType:"text"},
-    {fieldName:"area1name", dataType:"text"},
-    {fieldName:"area2code", dataType:"text"},
-    {fieldName:"area2name", dataType:"text"},
-    {fieldName:"area3code", dataType:"text"},
-    {fieldName:"area3name", dataType:"text"},
+    // {fieldName:"area1code", dataType:"text"},
+    // {fieldName:"area1name", dataType:"text"},
+    // {fieldName:"area2code", dataType:"text"},
+    // {fieldName:"area2name", dataType:"text"},
+    // {fieldName:"area3code", dataType:"text"},
+    // {fieldName:"area3name", dataType:"text"},
     {fieldName:"treeId", dataType:"text"},
     {fieldName:"treeName", dataType:"text"},
     {fieldName:"iconField", dataType:"text"}
@@ -14,14 +14,14 @@ export const fields = [
 
 export const columns = [
     {fieldName:"treeName", name:"treeName", width: 150, header:{text:"지역명"}},
-    {fieldName:"treeId", name:"treeId", header:{text:"TreeID"}},
-    {fieldName:"area1code", name:"area1code", header:{text:"시도코드"}},
-    {fieldName:"area1name", name:"area1name", header:{text:"시도명"}},
-    {fieldName:"area2code", name:"area2code", header:{text:"시군구코드"}},
-    {fieldName:"area2name", name:"area2name", header:{text:"시군구명"}},
-    {fieldName:"area3code", name:"area3code", header:{text:"읍면동코드"}},
-    {fieldName:"area3name", name:"area3name", header:{text:"읍면동명"}},
-    {fieldName:"iconField", name:"iconField"}
+    {fieldName:"treeId", name:"treeId", header:{text:"TreeID"} },
+    // {fieldName:"area1code", name:"area1code", header:{text:"시도코드"}},
+    // {fieldName:"area1name", name:"area1name", header:{text:"시도명"}},
+    // {fieldName:"area2code", name:"area2code", header:{text:"시군구코드"}},
+    // {fieldName:"area2name", name:"area2name", header:{text:"시군구명"}},
+    // {fieldName:"area3code", name:"area3code", header:{text:"읍면동코드"}},
+    // {fieldName:"area3name", name:"area3name", header:{text:"읍면동명"}},
+    // {fieldName:"iconField", name:"iconField"}
   ]
 
 export const rows = [
