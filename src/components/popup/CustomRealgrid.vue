@@ -52,7 +52,7 @@
 
   export default {
     name: 'RealGrid',
-    props: ["domName","dataset" ],
+    props: ["domName" ],
     data: function () {
         return {
             gridName: this.domName,

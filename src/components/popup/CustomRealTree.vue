@@ -12,7 +12,7 @@
   
   export default {
     name: 'RealGrid',
-    props: ["domName"],
+    props: ["domName" ],
     data: function () {
         return {
             gridName: this.domName,

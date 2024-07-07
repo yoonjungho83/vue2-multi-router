@@ -13,15 +13,20 @@ const routerPop = new VueRouter({
 
 const routesArray = [
     {
-      path: "/PopupHome",
-      name: "PopupHome",
-      component: "PopupHomeComponent",
+      path: "/popupView1",
+      name: "PopupView1",
+      component: "PopupView1",
     },
     {
-      path: "/detail",
-      name: "PopupDetail",
-      component: "PopupDetailComponent",
-    }
+      path: "/popupView2",
+      name: "PopupView2",
+      component: "PopupView2",
+    },
+    {
+      path: "/popupView3",
+      name: "PopupView3",
+      component: "PopupView3",
+    },
 ];
 
 function fatch(){
