@@ -18,17 +18,17 @@ export default {
         [
         {
           path: "/popupView1",
-          name: "PopupView1",
+          name: "RealGrid",
           component: "PopupView1",
         },
         {
           path: "/popupView2",
-          name: "PopupView2",
+          name: "RealGrid TreeView",
           component: "PopupView2",
         },
         {
           path: "/popupView3",
-          name: "PopupView3",
+          name: "GoJS TreeView",
           component: "PopupView3",
         },
         ]
@@ -51,6 +51,11 @@ export default {
         );
         state.selectedIdx++;
       };
+      const fn_revMenu = function(){
+        let cnt = menuList.length;
+        menuList.splice(cnt-1 ,1);
+        state.selectedIdx--;
+      };
 
       watch(menuList , ()=>{
         console.log("watch");
@@ -59,7 +64,7 @@ export default {
       const selectedIdx = computed(() => state.selectedIdx*2);
 
       return{
-        state , menuList , fn_setMenu , selectedIdx
+        state , menuList , fn_setMenu , selectedIdx , fn_revMenu
       }
   }
 }
@@ -75,11 +80,19 @@ export default {
         <router-link :to="menu.path">{{menu.name}}</router-link>   
         </li>
     </ul>
-    <h1>state.selectedIdx : {{state.selectedIdx}}</h1>
-    <button @click="fn_setMenu" > setmenu</button>
-    <h1>getViewMode : {{this.viewMode}}</h1>
-    <h1>container : {{state.container}}</h1>
-    <h1>selectedIdx*2 : {{selectedIdx}}</h1>
+    <h1></h1>
+    <button @click="fn_setMenu" > Insert Menu</button>
+    <button @click="fn_revMenu" > Remove Menu</button>
+    <div>
+      getViewMode : [{{this.viewMode}}] ||
+      container : [{{state.container}}] 
+      
+    </div>
+    <div>
+      state.selectedIdx : [{{state.selectedIdx}}] ||
+      selectedIdx*2 : [{{selectedIdx}}]
+    </div>
+    
   </div>
 </template>
 
