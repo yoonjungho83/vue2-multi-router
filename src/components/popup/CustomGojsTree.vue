@@ -1,5 +1,7 @@
 <template>
   <div>
+    <button @click="addNode"> Add Node</button>
+    <button @click="removeNode"> Remove Node</button>
     <div id="treeMenu" style="border: 0px solid black; width: 300px; height: 500px"></div>
   </div>
 </template>
@@ -12,20 +14,100 @@ export default {
   mounted() {
     this.initDiagram();
   },
+  data: function () {
+        return {
+          treeData : [
+                    { "key": 0               , "menuNm" : "Custom Menu 0"},
+                    { "key": 1, "parent": 0  , "menuNm" : "Custom Menu 1"},
+                    { "key": 2, "parent": 0  , "menuNm" : "Custom Menu 2"},
+                    { "key": 3, "parent": 0  , "menuNm" : "Custom Menu 3"},
+                    { "key": 4, "parent": 1  , "menuNm" : "Custom Menu 4"},
+                    { "key": 5, "parent": 1  , "menuNm" : "Custom Menu 5"},
+                    { "key": 6, "parent": 2  , "menuNm" : "Custom Menu 6"},
+                    { "key": 7, "parent": 2  , "menuNm" : "Custom Menu 7"},
+                    { "key": 8, "parent": 3  , "menuNm" : "Custom Menu 8"},
+                    { "key": 9, "parent": 3  , "menuNm" : "Custom Menu 9"},
+                    { "key": 10, "parent": 4 , "menuNm" : "Custom Menu 10"},
+                    { "key": 11, "parent": 4 , "menuNm" : "Custom Menu 11"},
+                    { "key": 12, "parent": 5 , "menuNm" : "Custom Menu 12"},
+                    ],
+          treeDiagram : null,
+          curKey : -1,
+        }
+    },
+  
   methods: {
+
+    keybind(key){
+      
+      console.log("key = ",key);
+      return (key+1)+"번메뉴";
+    },
+
+    //child add
+    addNode(){
+      console.log("add node ");
+      if(this.curKey > -1){
+        // 트랜잭션 시작
+        this.treeDiagram.startTransaction("addNode");
+        
+        // 데이터 추가
+        const newKey =  Math.max( ...this.treeData.map(x=>x.key) )+1   ;
+        const newNode = { key: newKey, parent: this.curKey, menuNm: "Add Child " + newKey };
+        this.treeDiagram.model.addNodeData(newNode);
+        
+        // 트랜잭션 종료
+        this.treeDiagram.commitTransaction("addNode");
+      }
+      else{
+        alert("선택된 데이터 없음.");
+      }
+    },
+    removeNode(){
+      console.log("remove node ");
+      if(this.curKey > 0){//root node 삭제 금지
+        // 트랜잭션 시작
+        this.treeDiagram.startTransaction("removeNode");
+        
+        // 데이터 추가
+        const removeNode = this.treeData.find(x=>x.key === this.curKey);
+        if(removeNode){
+          console.log("removeNode" , removeNode);
+        }
+        this.treeDiagram.model.removeNodeData(removeNode);
+        // 트랜잭션 종료
+        this.treeDiagram.commitTransaction("removeNode");
+
+        //모든 데이터 가져오기
+        console.log("this.treeDiagram.model.nodeDataArray length" , this.treeDiagram.model.nodeDataArray.length);
+        
+      }
+      else{
+        alert("선택된 데이터 없음.");
+      }
+    },
+    getSubtree(node) {
+      const descendants = [node];
+      const children = this.treeData.filter(n => n.parent === node.key);
+      children.forEach(child => descendants.push(...this.getSubtree(child)));
+      return descendants;
+    },
+
     initDiagram() {
       const $ = go.GraphObject.make;
 
-      const myDiagram = new go.Diagram('treeMenu', {
+      //sorting and comparator: 부모 노드의 바로 아래 자식 순서를 지정합니다.
+
+      this.treeDiagram = new go.Diagram('treeMenu', {
         allowMove: false,
         allowCopy: false,
         allowDelete: false,
         allowHorizontalScroll: false,
         layout: $(go.TreeLayout, {
-          alignment: go.TreeAlignment.Start,
-          angle: 0,
+          alignment: go.TreeAlignment.Start,//부모 노드와 자식 노드의 상대적 위치.
+          angle: 0,//노드 방향
           compaction: go.TreeCompaction.None,
-          layerSpacing: 16,
+          layerSpacing: 15,//계층간 거리
           layerSpacingParentOverlap: 1,
           nodeIndentPastParent: 1.0,
           nodeSpacing: 0,
@@ -34,11 +116,18 @@ export default {
         }),
       });
 
-      myDiagram.nodeTemplate = $(go.Node,
+      this.treeDiagram.nodeTemplate = $(go.Node,
         {
           selectionAdorned: false,
+
+          /*   event   */
           doubleClick: (e, node) => {
-            const cmd = myDiagram.commandHandler;
+            console.log("tree double click");
+            const cmd = this.treeDiagram.commandHandler;
+
+            // this.$router.push("/popupView1");
+            console.log(node);
+            console.log(node.isTreeExpanded);
             if (node.isTreeExpanded) {
               if (!cmd.canCollapseTree(node)) return;
             } else {
@@ -51,7 +140,12 @@ export default {
               cmd.expandTree(node);
             }
           },
+          click: (e, node) => {
+            this.curKey = node.key;
+            console.log("tree click");
+          },
         },
+        
         $('TreeExpanderButton', {
           _treeExpandedFigure: 'LineDown',
           _treeCollapsedFigure: 'LineRight',
@@ -74,11 +168,12 @@ export default {
             new go.Binding('source', 'isTreeExpanded', this.imageConverter).ofObject(),
             new go.Binding('source', 'isTreeLeaf', this.imageConverter).ofObject() 
           ),
-          $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding('text', 'key', s => 'item ' + s)) // text binding
+          // $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding('text', 'menuNm', s => s)) // text binding
+          $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding("text", "menuNm").makeTwoWay()) // text binding
         )
       );
 
-      myDiagram.linkTemplate = $(go.Link);
+      this.treeDiagram.linkTemplate = $(go.Link);
 
       const nodeDataArray = [{ key: 0 }];
       let max = 499;
@@ -87,25 +182,12 @@ export default {
         count = this.makeTree(3, count, max, nodeDataArray, nodeDataArray[0]);
       }
 
-      const treeData = [
-      { "key": 0 },
-      { "key": 1, "parent": 0  , "text" : "custItem"},
-      { "key": 2, "parent": 0  , "text" : "custItem"},
-      { "key": 3, "parent": 0  , "text" : "custItem"},
-      { "key": 4, "parent": 1  , "text" : "custItem"},
-      { "key": 5, "parent": 1  , "text" : "custItem"},
-      { "key": 6, "parent": 2  , "text" : "custItem"},
-      { "key": 7, "parent": 2  , "text" : "custItem"},
-      { "key": 8, "parent": 3  , "text" : "custItem"},
-      { "key": 9, "parent": 3  , "text" : "custItem"},
-      { "key": 10, "parent": 4 , "text" : "custItem"},
-      { "key": 11, "parent": 4 , "text" : "custItem"},
-      { "key": 12, "parent": 5 , "text" : "custItem"},
+      
 
-      ];
-
-      myDiagram.model = new go.TreeModel(treeData);
+      this.treeDiagram.model = new go.TreeModel(this.treeData);
     },
+
+
     makeTree(level, count, max, nodeDataArray, parentdata) {
       const numchildren = Math.floor(Math.random() * 10);
       for (let i = 0; i < numchildren; i++) {
