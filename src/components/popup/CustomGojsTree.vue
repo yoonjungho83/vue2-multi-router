@@ -98,6 +98,38 @@ export default {
 
       //sorting and comparator: 부모 노드의 바로 아래 자식 순서를 지정합니다.
 
+
+      // 컨텍스트 메뉴 템플릿 정의
+      const contextMenu = $(
+        go.Adornment,
+        "Vertical",
+        $("ContextMenuButton",
+          $(
+            go.TextBlock,
+            "Add Child",
+            { margin: 8, font: "14px sans-serif", stroke: "black" }
+          ),
+          {
+            click: (e, obj) => this.addChildToNode(obj.part.adornedObject.data.key),
+            mouseEnter: (e, obj) => obj.background = "rgba(100, 100, 100, 0.5)",
+            mouseLeave: (e, obj) => obj.background = "transparent"
+          }
+        ),
+        $("ContextMenuButton",
+          $(
+            go.TextBlock,
+            "Remove Node",
+            { margin: 8, font: "14px sans-serif", stroke: "black" }
+          ),
+          {
+            click: (e, obj) => this.removeNode(obj.part.adornedObject.data.key),
+            mouseEnter: (e, obj) => obj.background = "rgba(100, 100, 100, 0.5)",
+            mouseLeave: (e, obj) => obj.background = "transparent"
+          }
+        )
+      );
+
+
       this.treeDiagram = new go.Diagram('treeMenu', {
         allowMove: false,
         allowCopy: false,
@@ -169,7 +201,8 @@ export default {
             new go.Binding('source', 'isTreeLeaf', this.imageConverter).ofObject() 
           ),
           // $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding('text', 'menuNm', s => s)) // text binding
-          $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding("text", "menuNm").makeTwoWay()) // text binding
+          $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding("text", "menuNm").makeTwoWay()), // text binding
+          {contextMenu:contextMenu}
         )
       );
 
