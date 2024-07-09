@@ -79,7 +79,28 @@
       this.dataProvider.setFields(fields);
       this.gridView.setColumns(columns);
       this.dataProvider.setRows(rows);
+
+      this.gridView.setContextMenu([{
+          label: "Menu1"
+      }, {
+          label: "Menu2"
+      }, {
+          label: "-" // menu separator를 삽입합니다.
+      }, {
+          label: "ExcelExport"
+      }]);
+
+      this.gridView.onContextMenuPopup = function (grid, x, y, elementName) {
+        //헤더셀 영역에서는 컨텍스트 메뉴 실행하지 않음
+        console.log("grid" ,grid);
+        console.log("x" ,x);
+        console.log("y" ,y);
+        console.log("elementName" ,elementName);
+        return elementName != "HeaderCell";
+      }
     }
+
+    
   }
   </script>
   

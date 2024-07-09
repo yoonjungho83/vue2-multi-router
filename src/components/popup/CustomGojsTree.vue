@@ -1,3 +1,6 @@
+
+
+
 <template>
   <div>
     <button @click="addNode"> Add Node</button>
@@ -201,7 +204,7 @@ export default {
             new go.Binding('source', 'isTreeLeaf', this.imageConverter).ofObject() 
           ),
           // $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding('text', 'menuNm', s => s)) // text binding
-          $(go.TextBlock, { font: '9pt Verdana, sans-serif' }, new go.Binding("text", "menuNm").makeTwoWay()), // text binding
+          $(go.TextBlock, { font: '9pt Verdana, sans-serif'  }, new go.Binding("text", "menuNm").makeTwoWay()), // text binding
           {contextMenu:contextMenu}
         )
       );

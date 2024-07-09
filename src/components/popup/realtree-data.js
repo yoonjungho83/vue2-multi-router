@@ -13,7 +13,7 @@ export const fields = [
   ];
 
 export const columns = [
-    {fieldName:"treeName", name:"treeName", width: 150, header:{text:"지역명"}},
+    {fieldName:"treeName", name:"treeName", width: 150, header:{text:"지역명"} ,styles: { header: { textAlignment: "near" } } },
     {fieldName:"treeId", name:"treeId", header:{text:"TreeID"} },
     // {fieldName:"area1code", name:"area1code", header:{text:"시도코드"}},
     // {fieldName:"area1name", name:"area1name", header:{text:"시도명"}},

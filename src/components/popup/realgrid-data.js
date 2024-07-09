@@ -27,9 +27,10 @@ export const columns = [{
     type: "data",
     width: "80",
     styles: {
-        textAlignment: "center"
+        textAlignment: "left"
     },
     header: {
+        textAlignment: "near" ,
         text: "Name",
         showTooltip: true,
         tooltip:'<span style="color: red;">이름</span>',

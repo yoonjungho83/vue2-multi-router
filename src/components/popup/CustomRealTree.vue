@@ -1,6 +1,6 @@
 <template>
     <div class="real">
-      <div :id="gridName" style="width: 100%; height: 400px"></div>
+      <div :id="gridName" style="width: 100%; height: 400px;"></div>
       <button @click="loadData">load data~~!!</button>
     </div>
   </template>
@@ -46,7 +46,47 @@
         this.treeView.columnByName("treeId").visible =  false;//컬럼 숨김
         
         this.treeView.expandAll();//펼침
+
+        this.treeView.setContextMenu([
+          {
+              label: "Menu1"
+          }, 
+          {
+              label: "Menu2"
+          }, 
+          {
+              label: "-" // menu separator를 삽입합니다.
+          }, 
+          {
+              label: "ExcelExport"
+          }]);
+
+        this.treeView.onContextMenuPopup = function (grid, x, y, elementName) {
+          if(elementName.cellType === "header") return false;
+          //헤더셀 영역에서는 컨텍스트 메뉴 실행하지 않음
+          console.log("grid" ,grid);
+          console.log("x" ,x);
+          console.log("y" ,y);
+          console.log("elementName" ,elementName);
+          return elementName != "HeaderCell";
+        }
+
+        this.treeView.onContextMenuItemClicked = function (grid, label, index) {
+        alert("Context menu가 클릭됐습니다: " + label.label + "\n" + JSON.stringify(index));
+        if (label.label == "ExcelExport") {
+            grid.exportGrid({
+                type: "excel",
+                target: "local"
+            });
+        };
+  };
     }
   }
   </script>
+
+  <style scoped>
+  .rg-header-cell{
+    text-align:left;
+  }
+</style>
   
