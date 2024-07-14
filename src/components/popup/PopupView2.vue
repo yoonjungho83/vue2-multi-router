@@ -2,20 +2,26 @@
     <div>
       <h2>Realgrid tree sample</h2>
       <button @click="$router.push({ name: 'PopupDetail' })">Go to Detail</button>
-
-      <CustomRealTreeVue :domName="treeNm" />
-
+      <div style="height:200px;">
+        <CustomRealTreeVue :domName="treeNm" />
+      </div>
+      <div style="height:200px;">
+        <CustomRealTreeVue2></CustomRealTreeVue2>
+      </div>
     </div>
   </template>
   
   <script>
 import CustomRealTreeVue from './CustomRealTree.vue';
-
+import CustomRealTreeVue2 from './CustomRealTree2.vue';
 
 
   export default {
 
-    components: { CustomRealTreeVue },
+    components: { 
+      CustomRealTreeVue , 
+      CustomRealTreeVue2,
+    },
     data(){
       return {
         treeNm : "realTree"

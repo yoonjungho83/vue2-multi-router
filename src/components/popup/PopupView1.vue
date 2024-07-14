@@ -1,8 +1,9 @@
 <template>
   <div id="pdfDiv" >
     <h2>RealGrid Vue Sample</h2>
-    <CustomRealgrid :domName="dom1"/>
+    <!-- <CustomRealgrid :domName="dom1"/> -->
     <!-- <CustomRealgrid :domName="dom2"/> -->
+     <CustomRealgridMultiheaderVue/>
      <button class="mb-5 float-right" @click="exportToPDF">PDF 다운로드</button>
   </div>
 </template>
@@ -10,12 +11,15 @@
   <script>
 import CustomRealgrid from './CustomRealgrid.vue';
 
+
 import html2pdf from 'html2pdf.js';
+import CustomRealgridMultiheaderVue from './CustomRealgridMultiheader.vue';
 
   export default {
     name: 'App1',
   components: {
     CustomRealgrid,
+    CustomRealgridMultiheaderVue,
   },
   data() {
     return {

@@ -31,6 +31,11 @@ export default {
           name: "GoJS TreeView",
           component: "PopupView3",
         },
+        {
+      path: "/popupView4",
+      name: "PopupView4",
+      component: "PopupView4",
+    },
         ]
       );
 

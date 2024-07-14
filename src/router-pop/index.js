@@ -27,6 +27,11 @@ const routesArray = [
       name: "PopupView3",
       component: "PopupView3",
     },
+    {
+      path: "/popupView4",
+      name: "PopupView4",
+      component: "PopupView4",
+    },
 ];
 
 function fatch(){
