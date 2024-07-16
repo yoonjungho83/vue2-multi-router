@@ -37,6 +37,7 @@ const routesArray = [
 function fatch(){
     console.log("fatch routesArray " , routesArray);
     routesArray.forEach(route => {
+      let temp = `@/components/popup/${route.component}.vue`;
       routerPop.addRoute({
             path: route.path,
             name: route.name,
