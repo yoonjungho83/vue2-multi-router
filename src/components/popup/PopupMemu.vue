@@ -16,26 +16,26 @@ export default {
       console.log("1234");
       const menuList = reactive(
         [
-        {
-          path: "/popupView1",
-          name: "RealGrid",
-          component: "PopupView1",
-        },
-        {
-          path: "/popupView2",
-          name: "RealGrid TreeView",
-          component: "PopupView2",
-        },
-        {
-          path: "/popupView3",
-          name: "GoJS TreeView",
-          component: "PopupView3",
-        },
-        {
-      path: "/popupView4",
-      name: "PopupView4",
-      component: "PopupView4",
-    },
+            {
+              path: "/popupView1",
+              name: "RealGrid",
+              component: "PopupView1",
+            },
+            {
+              path: "/popupView2",
+              name: "RealGrid TreeView",
+              component: "PopupView2",
+            },
+            {
+              path: "/popupView3",
+              name: "GoJS TreeView",
+              component: "PopupView3",
+            },
+            {
+              path: "/popupView4",
+              name: "PopupView4",
+              component: "PopupView4",
+            },
         ]
       );
 
